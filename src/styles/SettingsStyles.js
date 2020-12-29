@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { sharedStyles, colors } from './SharedStyles';
 
-export const reportStyles = StyleSheet.create({
+export const settingsStyles = StyleSheet.create({
 
   // Containers
   container: {
@@ -13,14 +13,12 @@ export const reportStyles = StyleSheet.create({
   body: {
     ...sharedStyles.body,
     flex: 0.8,
-    justifyContent: 'flex-start',
-    // backgroundColor: 'lightblue'
-    // marginTop: 40
+    marginTop: 40
   }, 
   footer: {
     ...sharedStyles.footer,
     flex: 0.1,
-    // backgroundColor: 'tan'
+    //backgroundColor: 'tan'
   },
 
   // UI Elements
@@ -46,11 +44,6 @@ export const reportStyles = StyleSheet.create({
     color: colors.primaryDark,
     fontWeight: 'bold'
   },
-  trackletListContainer: { // unused?
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-  },  
   scaleTrackletContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -65,9 +58,7 @@ export const reportStyles = StyleSheet.create({
     alignItems: 'center'
   },
   scaleLabelText: {
-    alignSelf: 'flex-end',
-    color: colors.primaryDark,
-    fontSize: 14
+    alignSelf: 'flex-end'
   },
   scaleSliderContainer: {
     flex: 0.6,
@@ -75,21 +66,13 @@ export const reportStyles = StyleSheet.create({
     alignItems: 'center'
   },
   scaleSlider: {
-    //margin: 10,
-    width: '80%',
-    color: colors.primaryLight
-  },
-  scaleSliderThumbStyle: {
-    height: 20, 
-    width: 10,
-    backgroundColor: colors.primaryDark 
+    margin: 10,
+    width: '80%'
   },
   scaleValueText: {
     flex: 0.2,
     justifyContent: 'center',
-    alignItems: 'center',
-    color: colors.primaryDark,
-    fontSize: 24
+    alignItems: 'center'
   },
   doseTrackletContainer: {
     flex: 1,
@@ -113,25 +96,23 @@ export const reportStyles = StyleSheet.create({
   },
   textTrackletLabel: {
     alignSelf: 'flex-start',
-    paddingBottom: 10,
-    color: colors.primaryDark,
-    fontSize: 14
+    paddingBottom: 10
   },
   textTrackletInput: {
-    borderColor: colors.primaryDark,
+    borderColor: colors.outline,
     borderWidth: 1,
     width: '100%',
-    height: 50,
-    //height: '100%',
+    height: '100%',
     padding: 5, 
+    height: '100%',
     borderRadius: 20,
 
   },
   reportButtonContainer: {
+    flex: 0.2,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center', 
-    width: '100%'
+    alignItems: 'center'
   },
   mainActionButton: {
     ...sharedStyles.mainActionButton

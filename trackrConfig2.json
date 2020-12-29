@@ -1,0 +1,124 @@
+{
+  "reports": [
+    { 
+      "name": "Symptom",
+      "icon": "chart",
+      "tracklets": [
+        {
+          "name": "Headache",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Nausea",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Vertigo",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Congestion",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Comment",
+          "datatype": "text",
+          "defaultValue": ""
+        }
+      ]
+    },
+    { 
+      "name": "Meds",
+      "icon": "meds",
+      "tracklets": [
+        {
+          "name": "Migrelief XXXmg",
+          "datatype": "dose",
+          "defaultValueDose": 1,
+          "defaultValue": "false"
+        },
+        {
+          "name": "Vitamin D XXXmg",
+          "datatype": "dose",
+          "defaultValueDose": 1,
+          "defaultValue": "false"
+        },
+        {
+          "name": "Comment",
+          "datatype": "text",
+          "defaultValue": ""
+        }
+      ]
+    },
+    { 
+      "name": "Sleep",
+      "icon": "sleep",
+      "tracklets": [
+        {
+          "name": "Sleep Quality",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Sleep Duration",
+          "datatype": "scale",
+          "min": 0,
+          "max": 12,
+          "step": 1,
+          "defaultValue": 8
+        },
+        {
+          "name": "Comment",
+          "datatype": "text",
+          "defaultValue": ""
+        }
+      ]
+    },
+    {
+      "name": "Poop",
+      "icon": "poop",
+      "tracklets": [
+        {
+          "name": "Volume",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Solidity",
+          "datatype": "scale",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "defaultValue": 5
+        },
+        {
+          "name": "Comment",
+          "datatype": "text", 
+          "defaultValue": ""
+        }
+      ]
+    }
+  ]
+}

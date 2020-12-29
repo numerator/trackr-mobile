@@ -10,6 +10,7 @@ import { ReviewScreen } from './src/screens/ReviewScreen';
 import { SettingsMainScreen } from './src/screens/SettingsMainScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { TrackrIcon, ICON_SIZES, ICON_TYPES } from './src/screens/Icons';
+import { colors } from './src/styles/SharedStyles';
 
 const AppStack = createStackNavigator();
 const ReportStack = createStackNavigator();
@@ -48,18 +49,19 @@ function MainTabs() {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+        activeTintColor: colors.primaryDark,
+        inactiveTintColor: colors.primaryMedium,
       }}
       initialRouteName="Report"
     >
       <Tab.Screen name="Report" 
         component={ReportStackContainer} 
         options={{
-          tabBarIcon: () => {
+          tabBarIcon: ({color}) => {
             return ( 
               <TrackrIcon 
                 iconType={ICON_TYPES.REPORT}
+                color={color}
               /> 
             ); 
           }
@@ -68,10 +70,11 @@ function MainTabs() {
       <Tab.Screen name="Review" 
         component={ReviewScreen} 
         options={{
-          tabBarIcon: () => {
+          tabBarIcon: ({color}) => {
             return ( 
               <TrackrIcon 
                 iconType={ICON_TYPES.REVIEW}
+                color={color}
               /> 
             ); 
           }
@@ -80,10 +83,11 @@ function MainTabs() {
       <Tab.Screen name="Settings" 
         component={SettingsStackContainer} 
         options={{
-          tabBarIcon: () => {
+          tabBarIcon: ({color}) => {
             return ( 
               <TrackrIcon 
                 iconType={ICON_TYPES.SETTINGS}
+                color={color}
               /> 
             ); 
           }

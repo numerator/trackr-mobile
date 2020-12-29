@@ -16,6 +16,7 @@ export const loginStyles = StyleSheet.create({
   }, 
   footer: {
     ...sharedStyles.footer,
+    backgroundColor: 'tan'
   },
 
   // UI Elements
@@ -23,6 +24,7 @@ export const loginStyles = StyleSheet.create({
     margin: 20,
     padding: 20,
     width: '80%',
+    alignSelf: 'center',
     borderColor: colors.outline,
     borderWidth: 1,
     borderRadius: 20,
@@ -32,13 +34,24 @@ export const loginStyles = StyleSheet.create({
     margin: 20,
     padding: 20,
     width: '80%',
+    alignSelf: 'center',
     borderColor: colors.outline,
     borderWidth: 1,
     borderRadius: 20,
     backgroundColor: 'white'
   },
+  modeSwitchLabel: {
+    alignSelf: 'center'
+  },
+  hyperlink: {
+    textDecorationLine: 'underline', 
+    color: colors.primaryDark
+  },
   mainActionButton: {
     ...sharedStyles.mainActionButton
+  },
+  mainActionButtonText: {
+    ...sharedStyles.mainActionButtonText
   }
 });
 

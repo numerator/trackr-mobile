@@ -28,6 +28,14 @@ class DataStore {
     return this.currentUser;
   }
 
+  signOut = () => {
+    firebase.auth().signOut().then(function() {
+      this.currentUser = undefined;
+    }).catch(function(error) {
+      console.log('failed to sign out.')
+    });
+  }
+
   loadReportConfigs = () => {
     this.reportConfigs = configData.reports;
     console.log('loaded configs:', this.reportConfigs);

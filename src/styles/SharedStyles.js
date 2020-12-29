@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const colors = {
   background: 'white',
-  primaryDark: '#66B7F5',
+  primaryDark: '#2699FB',
+  primaryMedium: '#66B7F5',
   primaryLight: '#DAEBF8',
   secondaryDark: 'darkgray',
   secondaryLight: 'lightgray',
@@ -53,8 +54,8 @@ export const sharedStyles = StyleSheet.create({
   mainActionButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
     width: '40%',
+    height: 50,
     borderColor: colors.outline,
     borderWidth: 1,
     borderRadius: 20,
@@ -64,8 +65,7 @@ export const sharedStyles = StyleSheet.create({
   mainActionButtonText: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    paddingBottom: 40,
-    color: 'black'
+    //padding: 20,
+    color: 'white'
   }
 });

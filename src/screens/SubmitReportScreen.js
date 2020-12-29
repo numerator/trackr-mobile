@@ -4,11 +4,118 @@ import {
   View,
   FlatList,
   TextInput, 
-  TouchableOpacity 
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native';
+
 import { CheckBox, Slider } from 'react-native-elements';
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
+
+import _ from 'lodash';
+
 import { getDataStore } from '../data/DataStore';
 import { reportStyles } from '../styles/ReportStyles';
+
+function TextTracklet(props) {
+  const {tracklet, muteOthers, unmuteAll, updateThisTracklet} = props;
+  const {name, defaultValue} = tracklet;
+  const [val, setValue] = useState(defaultValue);
+
+  if (tracklet.value === undefined) {
+    tracklet.value = defaultValue;
+  }
+
+  return (
+    <View style={reportStyles.textTrackletContainer}>
+      <Text style={reportStyles.textTrackletLabel}>
+        {name}
+      </Text>
+      <TextInput
+        style={reportStyles.textTrackletInput}
+        placeholder={val}
+        multiline={true}
+        value={val}
+        onFocus={()=>{
+          muteOthers(tracklet.name);
+        }}
+        onBlur={()=>{
+          unmuteAll();
+        }}
+        onChangeText={newText => {
+          tracklet.value = newText;
+          setValue(newText);
+          updateThisTracklet(tracklet);
+        }}
+      />
+    </View>
+  );
+}
+
+function ScaleTracklet({tracklet, updateThisTracklet}) {
+
+  const {name, min, max, step, defaultValue} = tracklet;
+
+  if (tracklet.value === undefined) {
+    tracklet.value = defaultValue;
+  }
+  
+  const [val, setValue] = useState(tracklet.value);
+  if (tracklet.value === undefined) {
+    tracklet.value = defaultValue;
+  }
+
+  return (
+    <View style={reportStyles.scaleTrackletContainer}>
+      <View style={reportStyles.scaleLabelContainer}>
+        <Text style={reportStyles.scaleLabelText}>{name}</Text>
+      </View>
+      <View style={reportStyles.scaleSliderContainer}>
+        <Slider
+          style={reportStyles.scaleSlider}
+          minimumValue={min}
+          maximumValue={max}
+          allowTouchTrack={true}
+          thumbStyle={reportStyles.scaleSliderThumbStyle}
+          step={step}
+          value={val}
+          onValueChange={newVal => {
+            tracklet.value = newVal;
+            setValue(newVal);
+            updateThisTracklet(tracklet);
+          }}
+        />
+      </View>
+      <View style={reportStyles.scaleLabelContainer}>
+        <Text style={reportStyles.scaleValueText}>{val}</Text>
+      </View>
+    </View>
+  );
+}
+
+function DoseTracklet({tracklet, updateThisTracklet}) {
+  const {name, defaultValue} = tracklet;
+  const [val, setValue] = useState(defaultValue === 'true'); // turn text to boolean
+  if (tracklet.value === undefined) {
+    tracklet.value = defaultValue;
+  }
+
+  return (
+    <View style={reportStyles.doseTrackletContainer}>
+      <Text
+        style={reportStyles.doseTrackletLabel}
+      >{name}</Text>
+      <CheckBox
+        checked={val}
+        onPress={() => {
+          let newVal = !val;
+          tracklet.value = newVal;
+          setValue(newVal);
+          updateThisTracklet(tracklet);
+        }}
+      />
+    </View>
+  );
+}
 
 export function SubmitReportScreen({route, navigation}) { 
 
@@ -16,125 +123,101 @@ export function SubmitReportScreen({route, navigation}) {
   const {tracklets} = report;
   const dataStore = getDataStore();
 
-  function ScaleTracklet({tracklet}) {
-    const {name, min, max, step, defaultValue} = tracklet;
-    const [val, setValue] = useState(defaultValue);
-    if (tracklet.value === undefined) {
-      tracklet.value = defaultValue;
-    }
-  
-    return (
-      <View style={reportStyles.scaleTrackletContainer}>
-        <View style={reportStyles.scaleLabelContainer}>
-          <Text style={reportStyles.scaleLabelText}>{name}</Text>
-        </View>
-        <View style={reportStyles.scaleSliderContainer}>
-          <Slider
-            style={reportStyles.scaleSlider}
-            minimumValue={min}
-            maximumValue={max}
-            allowTouchTrack={true}
-            thumbStyle={{ height: 20, width: 10, backgroundColor: 'blue' }}
-            step={step}
-            value={val}
-            onValueChange={newVal => {
-              tracklet.value = newVal;
-              setValue(newVal);
-            }}
-          />
-        </View>
-        <View style={reportStyles.scaleLabelContainer}>
-          <Text style={reportStyles.scaleValueText}>{val}</Text>
-        </View>
-      </View>
-    );
+  const [_tracklets, updateTracklets] = useState(tracklets);
+
+  let newTracklets = _.cloneDeep(_tracklets);
+  for (let t of newTracklets) {
+    t.muted = false;
   }
 
-  function DoseTracklet({tracklet}) {
-    const {name, defaultValue} = tracklet;
-    const [val, setValue] = useState(defaultValue === 'true'); // turn text to boolean
-    if (tracklet.value === undefined) {
-      tracklet.value = defaultValue;
-    }
+  // let initMuteTracklets = {};
+  // for (let t of tracklets) {
+  //   initMuteTracklets[t.name] = false;
+  // }
 
-    return (
-      <View style={reportStyles.doseTrackletContainer}>
-        <Text
-          style={reportStyles.doseTrackletLabel}
-        >{name}</Text>
-        <CheckBox
-          checked={val}
-          onPress={() => {
-            let newVal = !val;
-            tracklet.value = newVal;
-            setValue(newVal);
-          }}
-        />
-      </View>
-    );
+  // const [muteTracklets, updateMuteTracklets] = useState(initMuteTracklets);
+
+  const muteOtherTracklets = (notMuted) => {
+    let newTracklets = _.cloneDeep(_tracklets);
+    for (let t of newTracklets) {
+      t.muted = t.name !== notMuted; // true for others
+    }
+    updateTracklets(newTracklets);
   }
 
-  function TextTracklet({tracklet}) {
-    const {name, defaultValue} = tracklet;
-    const [val, setValue] = useState(defaultValue);
-    if (tracklet.value === undefined) {
-      tracklet.value = defaultValue;
+  const unmuteAllTracklets = () => {
+    let newTracklets = _.cloneDeep(_tracklets);
+    for (let t of newTracklets) {
+      t.muted = false; 
     }
+    updateTracklets(newTracklets);
+  }
 
-    return (
-      <View style={reportStyles.textTrackletContainer}>
-        <Text style={reportStyles.textTrackletLabel}>
-          {name}
-        </Text>
-        <TextInput
-          style={reportStyles.textTrackletInput}
-          placeholder={val}
-          multiline={true}
-          onChangeText={newText => {
-            tracklet.value = newText;
-            setValue(newText);
-          }}
-        />
-      </View>
-    );
+  const updateThisTracklet = (tracklet) => {
+    let newTracklets = _.cloneDeep(_tracklets);
+    for (let t of newTracklets) {
+      if (t.name === tracklet.name) {
+        t.value = tracklet.value;
+      }
+    }
+    updateTracklets(newTracklets);
   }
 
   return (
     <View style={reportStyles.container}>
-
-      <View style={reportStyles.body}>
+      <KeyboardAvoidingView 
+        style={reportStyles.body}
+        behavior="padding"
+        keyboardVerticalOffset={-400}>
         <FlatList
-          data = {tracklets}
+          data = {_tracklets}
           keyExtractor = {item => item.name}
+          ListFooterComponentStyle = {reportStyles.reportButtonContainer}
+          ListFooterComponent={()=>{
+            return(
+              <View style={reportStyles.reportButtonContainer}>
+                <TouchableOpacity
+                  style={reportStyles.mainActionButton}
+                  onPress={() => {
+                    report.timestamp = Date.now();
+                    dataStore.submitReport(report);
+                    navigation.goBack();
+                  }}
+                >
+                <Text style={reportStyles.mainActionButtonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+            );
+          }}
           renderItem = {({item}) => {
-            if (item.datatype === 'scale') {
+            if (item.datatype === 'scale' && !item.muted) {
               return (
-                <ScaleTracklet tracklet={item}/>
+                <ScaleTracklet 
+                  tracklet={item}
+                  updateThisTracklet={updateThisTracklet}
+                />
               );
-            } else if (item.datatype === 'text') {
+            } else if (item.datatype === 'text' && !item.muted) {
               return (
-                <TextTracklet tracklet={item}/>
+                <TextTracklet 
+                  tracklet={item} 
+                  muteOthers={muteOtherTracklets}
+                  unmuteAll={unmuteAllTracklets}
+                  updateThisTracklet={updateThisTracklet}
+                />
               );
-            } else if (item.datatype === 'dose') {
+            } else if (item.datatype === 'dose' && !item.muted) {
               return (
-                <DoseTracklet tracklet={item}/>
+                <DoseTracklet 
+                  tracklet={item}
+                  updateThisTracklet={updateThisTracklet}
+                />
               );
             }
           }}
         />
-      </View>
-      <View style={reportStyles.footer}>
-        <TouchableOpacity
-          style={reportStyles.mainActionButton}
-          onPress={() => {
-            report.timestamp = Date.now();
-            dataStore.submitReport(report);
-            navigation.goBack();
-          }}
-        >
-          <Text style={reportStyles.mainActionButtonText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
+
     </View>
   );
 }
