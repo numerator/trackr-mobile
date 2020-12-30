@@ -180,6 +180,7 @@ export function SubmitReportScreen({route, navigation}) {
                   style={reportStyles.mainActionButton}
                   onPress={() => {
                     report.timestamp = Date.now();
+                    report.tracklets = _tracklets;
                     dataStore.submitReport(report);
                     navigation.goBack();
                   }}
