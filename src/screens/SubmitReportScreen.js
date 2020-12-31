@@ -218,7 +218,6 @@ export function SubmitReportScreen({route, navigation}) {
           }}
         />
       </KeyboardAvoidingView>
-
     </View>
   );
 }
