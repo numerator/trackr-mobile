@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 
 import { CheckBox, Slider } from 'react-native-elements';
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
 
 import { getDataStore } from '../data/DataStore';
 import { reportStyles } from '../styles/ReportStyles';
+import { colors } from '../styles/SharedStyles';
 
 function TextTracklet(props) {
   const {tracklet, muteOthers, unmuteAll, updateThisTracklet} = props;
@@ -93,10 +93,16 @@ function ScaleTracklet({tracklet, updateThisTracklet}) {
 }
 
 function DoseTracklet({tracklet, updateThisTracklet}) {
-  const {name, defaultValue} = tracklet;
-  const [val, setValue] = useState(defaultValue === 'true'); // turn text to boolean
-  if (tracklet.value === undefined) {
-    tracklet.value = defaultValue;
+  const {name, defaultUnitValue, defaultDoseValue, defaultTakenValue} = tracklet;
+  const [doseValue, setDoseValue] = useState(defaultDoseValue); 
+  const [unitValue, setUnitValue] = useState(defaultUnitValue); 
+  const [takenValue, setTakenValue] = useState(defaultTakenValue === 'true'); // turn text to boolean
+
+  if (tracklet.doseValue === undefined) {
+    tracklet.doseValue = defaultDoseValue;
+  }
+  if (tracklet.takenValue === undefined) {
+    tracklet.takenValue = defaultTakenValue;
   }
 
   return (
@@ -104,12 +110,36 @@ function DoseTracklet({tracklet, updateThisTracklet}) {
       <Text
         style={reportStyles.doseTrackletLabel}
       >{name}</Text>
+      <TextInput
+        style={reportStyles.doseTrackletInput}
+        placeholder={doseValue}
+        multiline={true}
+        value={doseValue}
+        onChangeText={newText => {
+          tracklet.doseValue = newText;
+          setDoseValue(newText);
+          updateThisTracklet(tracklet);
+        }}
+      />
+      <TextInput
+        style={reportStyles.doseTrackletInput}
+        placeholder={unitValue}
+        multiline={true}
+        value={unitValue}
+        onChangeText={newText => {
+          tracklet.unitValue = newText;
+          setUnitValue(newText);
+          updateThisTracklet(tracklet);
+        }}
+      />
       <CheckBox
-        checked={val}
+        checked={takenValue}
+        style={reportStyles.doseTrackletCheckbox}
+        uncheckedColor={colors.primaryMedium}
         onPress={() => {
-          let newVal = !val;
-          tracklet.value = newVal;
-          setValue(newVal);
+          let newVal = !takenValue;
+          tracklet.takenValue = newVal;
+          setTakenValue(newVal);
           updateThisTracklet(tracklet);
         }}
       />
@@ -117,7 +147,7 @@ function DoseTracklet({tracklet, updateThisTracklet}) {
   );
 }
 
-export function SubmitReportScreen({route, navigation}) { 
+export function ReportSubmitScreen({route, navigation}) { 
 
   const {report} = route.params; 
   const {tracklets} = report;

@@ -2,11 +2,12 @@
   "expo": {
     "name": "trackr-mobile",
     "slug": "trackr-mobile",
-    "version": "1.0.0",
+    "version": "0.1.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ios-icon.png",
+    "primaryColor": "#66B7F5",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/trackr-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,13 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.numerator.trackr-mobile",
+      "buildNumber": "0.0.1"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/android-adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.numerator.trackrmobile",
+      "versionCode": 1,
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -45,6 +45,12 @@ class DataStore {
     return this.reportConfigs;
   }
 
+  updateReportReminders = (report) => {
+    // delete scheduled 
+    // reprogram scheduled
+    // save the report, save the config file
+  }
+
   submitReport = (report) => {
     if (this.currentUser === undefined) {
       throw 'NoCurrentUserError';

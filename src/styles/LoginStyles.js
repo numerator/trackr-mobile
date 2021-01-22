@@ -16,7 +16,6 @@ export const loginStyles = StyleSheet.create({
   }, 
   footer: {
     ...sharedStyles.footer,
-    backgroundColor: 'tan'
   },
 
   // UI Elements

@@ -12,7 +12,7 @@ export const reportStyles = StyleSheet.create({
   },
   body: {
     ...sharedStyles.body,
-    flex: 0.8,
+    flex: 1,
     justifyContent: 'flex-start',
     // backgroundColor: 'lightblue'
     // marginTop: 40
@@ -32,17 +32,20 @@ export const reportStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    margin: 30,
+    //margin: 30,
+    marginVertical: 30,
     width: '100%'
   },
   reportRowIcon: {
     flex: 0.2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center', 
+    //backgroundColor: 'green'
   },
   reportRowText: {
     flex: 0.4,
     fontSize: 18,
+    marginLeft: 20,
     color: colors.primaryDark,
     fontWeight: 'bold'
   },
@@ -60,7 +63,7 @@ export const reportStyles = StyleSheet.create({
     width: '100%', 
   },
   scaleLabelContainer: {
-    flex: 0.2,
+    flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -70,7 +73,7 @@ export const reportStyles = StyleSheet.create({
     fontSize: 14
   },
   scaleSliderContainer: {
-    flex: 0.6,
+    flex: 0.8,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -101,7 +104,21 @@ export const reportStyles = StyleSheet.create({
   },
   doseTrackletLabel: {
     flex: 0.5,
-    textAlign: 'right'
+    textAlign: 'right',
+    color: colors.primaryDark
+  },
+  doseTrackletInput: {
+    flex: 0.2,
+    borderWidth: 1,
+    borderColor: colors.primaryMedium,
+    borderRadius: 10,
+    margin: 10, 
+    padding: 3,
+    textAlign: 'center',
+    color: colors.primaryDark
+  },
+  doseTrackletCheckbox: {
+    //uncheckedColor: colors.primaryMedium
   },
   textTrackletContainer: {
     flex: 1,
@@ -125,7 +142,6 @@ export const reportStyles = StyleSheet.create({
     //height: '100%',
     padding: 5, 
     borderRadius: 20,
-
   },
   reportButtonContainer: {
     flexDirection: 'row',

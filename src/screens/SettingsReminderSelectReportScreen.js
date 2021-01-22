@@ -1,48 +1,43 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity, View, FlatList } from 'react-native';
 
 import _ from 'lodash';
 
 import { getDataStore } from '../data/DataStore';
-import { reportStyles } from '../styles/ReportStyles';
+import { settingsStyles } from '../styles/SettingsStyles';
 import { ICON_TYPES, TrackrIcon } from './Icons';
 
-export function ReportMainScreen(props) {
+export function SettingsReminderSelectReportScreen(props) {
 
   const dataStore = getDataStore();
   const reportConfigs = dataStore.getReportConfigs();
-  console.log('in report screen, configs:', reportConfigs);
   return (
-    <View style={reportStyles.container}>
-      <View style={reportStyles.header}>
-        <Text style={reportStyles.headerText}>Create Report</Text>
+    <View style={settingsStyles.container}>
+      <View style={settingsStyles.header}>
+        <Text style={settingsStyles.headerText}>Update Reminders</Text>
       </View>
-      <View style={reportStyles.body}>
+      <View style={[settingsStyles.body, {alignItems: 'stretch'}]}>
         <FlatList
           data = {reportConfigs}
           keyExtractor = {(item) => item.name}
           renderItem = {({item}) => {
             return (
               <TouchableOpacity
-                style={reportStyles.reportRow}
+                style={settingsStyles.reportRow}
                 onPress={()=>{
-                  props.navigation.navigate('SubmitReport', 
+                  props.navigation.navigate('SettingsReminderUpdateReport', 
                     {report: _.cloneDeep(item)}
                   );
                 }}
               >
-                <View style={reportStyles.reportRowIcon}>
+                <View style={settingsStyles.reportRowIcon}>
                   <TrackrIcon iconType={item.icon}/>
                 </View>
-                <Text style={reportStyles.reportRowText}>
+                <Text style={settingsStyles.reportRowText}>
                   {item.name}
                 </Text>
-                <View style={reportStyles.reportRowIcon}>
-                  {/* <TrackrIcon iconType={ICON_TYPES.WARN}/> */}
-                </View>
-                <View style={reportStyles.reportRowIcon}>
+                <View style={settingsStyles.reportRowIcon}>
                   <TrackrIcon iconType={ICON_TYPES.NEXT}/>
                 </View>
               </TouchableOpacity>
@@ -50,7 +45,7 @@ export function ReportMainScreen(props) {
           }}
         />
       </View>
-      <View style={reportStyles.footer}/>
+      <View style={settingsStyles.footer}/>
       <StatusBar style="auto" />
     </View>
   );

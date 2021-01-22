@@ -39,9 +39,24 @@ function FocusableTextInput(props) {
   );
 }
 
+function sendPasswordResetEmail (email) {
+  Alert.prompt('Reset Password',
+    'Message',
+    (emailInput)=>{
+      firebase.auth().sendPasswordResetEmail(emailInput)
+        .then(function (user) {
+          Alert.alert('Reset Email Sent', 
+            'Password reset email has been sent to ' + emailInput + '.\n\n' +
+            'Sign in after you\'ve reset your password.')
+        }).catch(function (e) {
+          console.log(e);
+        })
+    }
+  );
+}
+
 function LoginForm (props) {
   let {email, setEmail, pass1, setPass1, setMode} = props;
-  console.log("rendering LoginForm, props:", props);
   return(
     <View style={loginStyles.container}>
       <View style={loginStyles.body}>
@@ -63,6 +78,20 @@ function LoginForm (props) {
           <Text 
             style={loginStyles.hyperlink}
             onPress={()=>setMode('create')}>Create one.
+          </Text>
+        </Text>
+        <Text style={loginStyles.modeSwitchLabel}>Forgot your password? {' '}
+          <Text 
+            style={loginStyles.hyperlink}
+            onPress={(Email) => {
+              firebase.auth().sendPasswordResetEmail(Email)
+                .then(function (user) {
+                  alert('Please check your email...')
+                }).catch(function (e) {
+                  console.log(e)
+                })
+            }}>
+            Reset it.
           </Text>
         </Text>
       </View>

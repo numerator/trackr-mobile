@@ -3,6 +3,26 @@
     { 
       "name": "Symptom",
       "icon": "chart",
+      "reminders": [
+        {
+          "name": "Morning",
+          "frequency": "daily",
+          "hour": 10,
+          "minute": 30
+        },
+        {
+          "name": "Afternoon",
+          "frequency": "daily",
+          "hour": 17,
+          "minute": 30
+        },
+        {
+          "name": "Evening",
+          "frequency": "daily",
+          "hour": 22,
+          "minute": 30
+        }
+      ],
       "tracklets": [
         {
           "name": "Headache",
@@ -46,18 +66,35 @@
     { 
       "name": "Meds",
       "icon": "meds",
+      "reminders": [
+        {
+          "name": "Bedtime",
+          "frequency": "daily",
+          "hour": 22,
+          "minute": 30
+        }
+      ],
       "tracklets": [
         {
-          "name": "Migrelief XXXmg",
+          "name": "Migrelief",
           "datatype": "dose",
-          "defaultValueDose": 1,
-          "defaultValue": "false"
+          "defaultUnitValue": "mg",
+          "defaultDoseValue": "400",
+          "defaultTakenValue": "false"
         },
         {
-          "name": "Vitamin D XXXmg",
+          "name": "Mucinex",
           "datatype": "dose",
-          "defaultValueDose": 1,
-          "defaultValue": "false"
+          "defaultUnitValue": "mg",
+          "defaultDoseValue": "600",
+          "defaultTakenValue": "false"
+        },
+        {
+          "name": "Allegra 24H",
+          "datatype": "dose",
+          "defaultUnitValue": "mg",
+          "defaultDoseValue": "180",
+          "defaultTakenValue": "false"
         },
         {
           "name": "Comment",
@@ -69,6 +106,14 @@
     { 
       "name": "Sleep",
       "icon": "sleep",
+      "reminders": [
+        {
+          "name": "Bedtime",
+          "frequency": "daily",
+          "hour": 10,
+          "minute": 30
+        }
+      ],
       "tracklets": [
         {
           "name": "Sleep Quality",
