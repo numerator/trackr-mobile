@@ -61,10 +61,8 @@ export function SettingsReminderUpdateReportScreen({route, navigation}) {
       }
     }
     updateReminders(newReminders);
-    console.log(newReminders);
   }
 
-  console.log('about to render SRURS', reminders);
   return (
     <View style={settingsStyles.container}>
       <KeyboardAvoidingView 
@@ -75,7 +73,6 @@ export function SettingsReminderUpdateReportScreen({route, navigation}) {
           data = {_reminders}
           keyExtractor = {item => item.name}
           renderItem = {({item}) => {
-            console.log('rendering item', item);
             return (
               <ReminderTimeSetting 
                 reminder={item} 
@@ -90,6 +87,7 @@ export function SettingsReminderUpdateReportScreen({route, navigation}) {
             onPress={() => {
               report.timestamp = Date.now();
               report.reminders = _reminders;
+              console.log('about to update reminders', _reminders);
               dataStore.updateReportReminders(report);
               navigation.goBack();
             }}

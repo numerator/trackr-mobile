@@ -8,27 +8,29 @@ export function SettingsMainScreen(props) {
     <View style={settingsStyles.container}>
 
       <View style={settingsStyles.body}>
-
-        <TouchableOpacity
-          style={settingsStyles.mainActionButton}
-          onPress={() => {
-            props.navigation.navigate('SettingsReminderSelectReport');
-          }}
-        >
-          <Text style={settingsStyles.mainActionButtonText}>
-            Reminders
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={settingsStyles.mainActionButton}
-          onPress={() => {
-            getDataStore().signOut();
-            props.navigation.navigate('SignIn');
-          }}
-        >
-          <Text style={settingsStyles.mainActionButtonText}>Logout</Text>
-        </TouchableOpacity>
+        <View style={settingsStyles.reportButtonContainer}>
+          <TouchableOpacity
+            style={settingsStyles.mainActionButton}
+            onPress={() => {
+              props.navigation.navigate('SettingsReminderSelectReport');
+            }}
+          >
+            <Text style={settingsStyles.mainActionButtonText}>
+              Reminders
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={settingsStyles.reportButtonContainer}>
+          <TouchableOpacity
+            style={settingsStyles.mainActionButton}
+            onPress={() => {
+              getDataStore().signOut();
+              props.navigation.navigate('SignIn');
+            }}
+          >
+            <Text style={settingsStyles.mainActionButtonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
 
       </View>
     </View>

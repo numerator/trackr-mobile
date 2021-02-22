@@ -108,7 +108,7 @@
       "icon": "sleep",
       "reminders": [
         {
-          "name": "Bedtime",
+          "name": "Wake Up",
           "frequency": "daily",
           "hour": 10,
           "minute": 30

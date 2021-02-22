@@ -16,7 +16,6 @@ function FocusableTextInput(props) {
   const autoFocus = props.autoFocus;
   const secure = props.secure;
   const type= props.type;
-  console.log("rendering FTI, props:", props, "value:", value);
 
   return (
     <TextInput

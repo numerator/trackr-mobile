@@ -13,7 +13,7 @@ export function ReportMainScreen(props) {
 
   const dataStore = getDataStore();
   const reportConfigs = dataStore.getReportConfigs();
-  console.log('in report screen, configs:', reportConfigs);
+  // console.log('in report screen, configs:', reportConfigs);
   return (
     <View style={reportStyles.container}>
       <View style={reportStyles.header}>
@@ -28,7 +28,7 @@ export function ReportMainScreen(props) {
               <TouchableOpacity
                 style={reportStyles.reportRow}
                 onPress={()=>{
-                  props.navigation.navigate('SubmitReport', 
+                  props.navigation.navigate('ReportSubmit', 
                     {report: _.cloneDeep(item)}
                   );
                 }}
