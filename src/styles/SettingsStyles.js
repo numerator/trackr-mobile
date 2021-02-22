@@ -13,7 +13,8 @@ export const settingsStyles = StyleSheet.create({
   body: {
     ...sharedStyles.body,
     flex: 0.8,
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
   }, 
   footer: {
     ...sharedStyles.footer,
@@ -23,6 +24,44 @@ export const settingsStyles = StyleSheet.create({
   // UI Elements
   headerText: {
     ...sharedStyles.headerText,
+  },
+
+
+  disabled : {
+    color: colors.primaryLight,
+  },
+  settingsHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingVertical: 10, 
+    paddingLeft: 10,
+    backgroundColor: colors.primaryLight
+  },
+  settingsRow: {
+//    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    paddingLeft: 20,
+  },
+  settingsRowText: {
+    flex: 0.45,
+    width: '100%',
+    marginHorizontal: 10,
+    color: colors.primaryDark,
+    fontSize: 18,
+    // backgroundColor: 'lightgreen'
+  },
+  settingsRowIcon: {
+    flex: 0.1,
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    // backgroundColor: 'tan'
+
   },
 
   // Select Report Screen
@@ -55,13 +94,11 @@ export const settingsStyles = StyleSheet.create({
     alignItems: 'center'
   },
 
-
   // Update Report Screen
   dateTimeControl: {
     flex: 0.5,
     alignItems: 'center'
   },
-
 
 
   // Common
